@@ -1,0 +1,399 @@
+body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f9ff;
+            /* Light Sky Blue */
+            color: #334155;
+            /* Slate 700 */
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.85), rgba(37, 99, 235, 0.85)), url('https://placehold.co/1200x800/BFDBFE/1E40AF?text=Sistem+Informasi+Pemilihan+Mobil');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .view {
+            display: none;
+            height: 100%;
+        }
+
+        .active-view {
+            display: block;
+        }
+
+        .main-container-flex {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e0f2fe;
+            /* Lighter Sky Blue */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #7dd3fc;
+            /* Sky Blue 300 */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+            /* Sky Blue 400 */
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 2% auto;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            /* Slate 200 */
+            width: 90%;
+            max-width: 650px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content-form {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-button {
+            color: #94a3b8;
+            /* Slate 400 */
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #475569;
+            /* Slate 600 */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #cpTopNavbar {
+            background-color: #1e293b;
+            /* Slate 800 */
+        }
+
+        #cpTopNavbar .cp-nav-button.active {
+            background-color: #2563eb;
+            /* Blue 600 */
+            color: white;
+            font-weight: 600;
+        }
+
+        #cpTopNavbar .cp-nav-button:hover:not(.active) {
+            background-color: #1d4ed8;
+            /* Blue 700 */
+            color: white;
+        }
+
+        #cpTopNavbar .cp-nav-button {
+            color: #cbd5e1;
+            /* Slate 300 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            padding: 0.625rem 0.75rem;
+            /* py-2.5 px-3 */
+            border-radius: 0.375rem;
+            /* rounded-md */
+            font-size: 0.875rem;
+            /* text-sm */
+            display: inline-flex;
+            /* For horizontal layout */
+            align-items: center;
+        }
+
+        .cp-content-section {
+            display: none;
+        }
+
+        .cp-content-section.active-cp-content {
+            display: block;
+        }
+
+        /* Table styles */
+        .table-container {
+            overflow-x: auto;
+            /* For responsive tables */
+        }
+
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            /* text-sm */
+        }
+
+        table.custom-table th,
+        table.custom-table td {
+            border: 1px solid #e2e8f0;
+            /* slate-200 */
+            padding: 0.75rem;
+            /* p-3 */
+            text-align: left;
+        }
+
+        table.custom-table th {
+            background-color: #f1f5f9;
+            /* slate-100 */
+            font-weight: 600;
+            /* font-semibold */
+            color: #334155;
+            /* slate-700 */
+        }
+
+        table.custom-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+            /* slate-50 */
+        }
+
+        table.custom-table tbody tr:hover {
+            background-color: #eff6ff;
+            /* blue-50 */
+        }
+
+        table.custom-table .action-buttons button {
+            margin-right: 0.5rem;
+        }
+
+        table.custom-table .action-buttons button:last-child {
+            margin-right: 0;
+        }
+
+
+        @media print {
+            body>*:not(script):not(style) {
+                display: none !important;
+            }
+
+            nav.top-navbar,
+            #cpTopNavbar {
+                display: none !important;
+            }
+
+            .modal,
+            #jsMessage,
+            .cta-button,
+            footer,
+            #printAdminCarListButton,
+            #printUserHistoryButton,
+            #printRankingReportButton {
+                display: none !important;
+            }
+
+            #recommendationView>h2,
+            #recommendationView>div:not(#recommendationResults),
+            #recommendationResults>.flex.justify-between.items-center,
+            #controlPanelView>main>div>.flex.justify-between.items-center,
+            #showUserAddCarFormButtonCP,
+            #showCriteriaFormButton {
+                display: none !important;
+            }
+
+            /* Hide action buttons column in all printed tables */
+            table.custom-table th.action-column-header,
+            table.custom-table td.action-buttons {
+                display: none !important;
+            }
+
+
+            body.printing-recommendation-report .main-container-flex,
+            body.printing-admin-report .main-container-flex,
+            body.printing-user-history-report .main-container-flex {
+                display: flex !important;
+                flex-direction: column !important;
+                background-color: #fff !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: auto !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            body.printing-recommendation-report #recommendationView,
+            body.printing-admin-report #controlPanelView,
+            body.printing-user-history-report #controlPanelView {
+                display: block !important;
+                background-color: #fff !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: auto !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                padding: 20px !important;
+                margin: 0 !important;
+            }
+
+            body.printing-recommendation-report #recommendationResults {
+                display: block !important;
+                padding: 20px !important;
+            }
+
+            body.printing-recommendation-report #recommendationResults #resultsTableContainer {
+                display: none !important;
+            }
+
+            body.printing-recommendation-report #recommendationTablePrintArea {
+                display: block !important;
+            }
+
+            body.printing-recommendation-report #recommendationTablePrintArea .print-title,
+            body.printing-admin-report .print-title,
+            body.printing-user-history-report .print-title {
+                display: block !important;
+                text-align: center;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+                color: #000 !important;
+            }
+
+            body.printing-admin-report #controlPanelView>main {
+                display: block !important;
+                width: 100% !important;
+                padding: 20px !important;
+            }
+
+            body.printing-admin-report #controlPanelView main>.cp-content-section:not(#userCarsManagementContent) {
+                display: none !important;
+            }
+
+            body.printing-admin-report #controlPanelView main #userCarsManagementContent {
+                display: block !important;
+            }
+
+            body.printing-admin-report #controlPanelView main #userCarsManagementContent>h2.text-2xl {
+                /* Title for admin car list */
+                display: block !important;
+                text-align: center;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+                color: #000 !important;
+                font-weight: bold;
+            }
+
+            body.printing-admin-report #controlPanelView main #userCarsManagementContent .bg-white.p-6.rounded-lg.shadow>p:first-of-type {
+                display: none !important;
+                /* Hide descriptive paragraph */
+            }
+
+            body.printing-user-history-report #controlPanelView>main {
+                display: block !important;
+                width: 100% !important;
+                padding: 20px !important;
+            }
+
+            body.printing-user-history-report #controlPanelView main>.cp-content-section:not(#userHistoryContent) {
+                display: none !important;
+            }
+
+            body.printing-user-history-report #controlPanelView main #userHistoryContent {
+                display: block !important;
+            }
+
+            body.printing-user-history-report #controlPanelView main #userHistoryContent>h2.text-2xl {
+                /* Title for user history */
+                display: block !important;
+                text-align: center;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+                color: #000 !important;
+                font-weight: bold;
+            }
+
+            body.printing-user-history-report #controlPanelView main #userHistoryContent .bg-white.p-6.rounded-lg.shadow>p:first-of-type {
+                display: none !important;
+                /* Hide descriptive paragraph */
+            }
+
+            body.printing-user-history-report #controlPanelView main #userHistoryTableContainer {
+                display: block !important;
+            }
+
+            table.custom-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-size: 9pt;
+            }
+
+            table.custom-table th,
+            table.custom-table td {
+                border: 1px solid #333 !important;
+                padding: 5px !important;
+                text-align: left !important;
+                color: #000 !important;
+            }
+
+            table.custom-table th {
+                background-color: #eee !important;
+                font-weight: bold !important;
+            }
+
+            td.text-right {
+                text-align: right !important;
+            }
+
+            td.text-center {
+                text-align: center !important;
+            }
+
+            body.printing-recommendation-report,
+            body.printing-admin-report,
+            body.printing-user-history-report {
+                font-size: 10pt !important;
+                background-color: #fff !important;
+            }
+
+            body.printing-recommendation-report *,
+            body.printing-admin-report *,
+            body.printing-user-history-report * {
+                box-shadow: none !important;
+                background-color: transparent !important;
+                color: #000 !important;
+            }
+
+            img {
+                display: none !important;
+            }
+        }

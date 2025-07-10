@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPK Pemilihan Mobil - Metode Multi Attribute Utility Theory (MAUT)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <script src="javascript.js" defer></script>
+</head>
+
+<body>
+    <nav class="top-navbar bg-gradient-to-r from-sky-600 to-blue-700 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">SISPEMOB</h1>
+            <div class="md:hidden">
+                <button id="hamburgerButton" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="navLinks" class="hidden md:flex md:items-center md:space-x-2">
+                <button id="homeButton"
+                    class="nav-button block w-full text-left md:w-auto px-4 py-2 rounded-md hover:bg-sky-700 transition duration-150">Beranda</button>
+                <button id="recommendationButtonNav"
+                    class="nav-button block w-full text-left md:w-auto px-4 py-2 rounded-md hover:bg-sky-700 transition duration-150">Rekomendasi</button>
+                <button id="controlPanelButtonNav"
+                    class="nav-button block w-full text-left md:w-auto px-4 py-2 rounded-md hover:bg-sky-700 transition duration-150">Control
+                    Panel</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container-flex">
+        <div id="jsMessage" class="hidden mb-4 p-4 rounded-md mx-4 md:mx-8" role="alert">
+            <span id="jsMessageText"></span>
+            <button type="button" class="ml-4 float-right font-semibold"
+                onclick="document.getElementById('jsMessage').classList.add('hidden')">&times;</button>
+        </div>
+
+        <div id="homeView" class="view active-view p-4 md:p-8">
+            <section id="hero" class="hero-bg text-white py-20 md:py-32 rounded-lg shadow-xl">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Temukan Mobil Terbaik Sesuai Kebutuhan Anda!
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                        Sistem Informasi Pemiihan Mobil adalah Sistem
+                        Pendukung Keputusan (SPK) cerdas yang membantu dalam
+                        menentukan mobil terbaik menggunakan metode Multi
+                        Attribute Utility Theory (MAUT).
+                        Kelola daftar mobil dan kriteria melalui Control
+                        Panel, lalu dapatkan rekomendasi di halaman
+                        Rekomendasi.
+                    </p>
+                    <button id="goToRecommendationButtonHome"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg cta-button inline-block">
+                        Mulai Mencari Rekomendasi Mobil
+                    </button>
+                </div>
+            </section>
+            <section id="tentang" class="py-16 bg-white mt-8 rounded-lg shadow-md">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-10"><img
+                                src="https://placehold.co/600x400/60A5FA/FFFFFF?text=Analisis+Mobil+MAUT"
+                                alt="Ilustrasi Sistem Pendukung Keputusan Mobil Metode MAUT"
+                                class="rounded-lg shadow-xl w-full"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E0E0/B0B0B0?text=Image+Not+Found';">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl font-bold mb-6 text-blue-700">Tentang SISPEMOB</h2>
+                            <p class="text-slate-700 mb-4 leading-relaxed">SISPEMOB dirancang untuk membantu calon
+                                pembeli
+                                dalam membuat keputusan strategis terkait
+                                pemilihan mobil.</p>
+                            <p class="text-slate-700 mb-4 leading-relaxed">Sistem
+                                ini mengimplementasikan metode <strong class="text-blue-600">Multi-Attribute
+                                    Utility Theory (MAUT)</strong>. Metode ini
+                                adalah salah satu metode pengambilan
+                                keputusan multikriteria yang populerdiketahui Pembuat ini.</p>
+                            <p class="text-slate-700 leading-relaxed">Admin
+                                menetapkan kriteria dan mengelola daftar
+                                mobil. Pengguna menyesuaikan preferensi
+                                bobot, lalu sistem memberikan
+                                rekomendasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="visual" class="py-16 bg-white mt-8 rounded-lg shadow-md">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-blue-700">Bagaimana
+                        SISPEMOB Bekerja?</h2>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="md:w-1/2 order-2 md:order-1">
+                            <ol class="list-decimal list-inside space-y-4 text-slate-700 text-lg">
+                                <li><strong class="text-blue-600">Admin Sistem (Control
+                                        Panel):</strong> Mengatur kriteria
+                                    evaluasi, bobot standar, dan daftar
+                                    mobil.</li>
+                                <li><strong class="text-blue-600">Pengguna
+                                        (Halaman Rekomendasi):</strong>
+                                    Menyesuaikan bobot preferensi
+                                    kriteria.</li>
+                                <li><strong class="text-blue-600">Proses
+                                        Multi-Attribute Utility Theory (MAUT):</strong> Sistem menghitung
+                                    nilai utilitas ternormalisasi untuk
+                                    setiap mobil berdasarkan kriteria dan
+                                    preferensi.</li>
+                                <li><strong class="text-blue-600">Perankingan:</strong>
+                                    Sistem mengakumulasi skor dan
+                                    menghasilkan peringkat
+                                    mobil.</li>
+                                <li><strong class="text-blue-600">Hasil &
+                                        Laporan:</strong> Pengguna
+                                    mendapatkan rekomendasi mobil terbaik
+                                    dan dapat mencetak hasil laporan.</li>
+                            </ol>
+                        </div>
+                        <div class="md:w-1/2 order-1 md:order-2"><img
+                                src="https://placehold.co/600x450/3B82F6/FFFFFF?text=Alur+Sistem+Pemilihan+Mobil"
+                                alt="Diagram Alur Cara Kerja Sistem Pemilihan Mobil" class="rounded-lg shadow-xl w-full"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x450/E0E0E0/B0B0B0?text=Image+Not+Found';">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="controlPanelView" class="view">
+            <nav id="cpTopNavbar" class="bg-slate-800 text-slate-100 p-3 shadow-lg w-full">
+                <div class="container mx-auto flex flex-wrap justify-between items-center">
+                    <div class="flex items-center space-x-2 md:space-x-3 mb-2 md:mb-0">
+                        <h2 class="text-xl font-semibold text-white mr-4">Control
+                            Panel</h2>
+                        <button data-content="criteriaContent" class="cp-nav-button">
+                            Pengaturan Kriteria
+                        </button>
+                        <button data-content="userCarsManagementContent" class="cp-nav-button">
+                            Manajemen Mobil
+                        </button>
+                        <button data-content="userHistoryContent" class="cp-nav-button">
+                            Riwayat Pengguna
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2 md:space-x-3">
+                        <button id="cpHomeButton" class="cp-nav-button bg-sky-600 hover:bg-sky-700">
+                            Kembali ke Beranda
+                        </button>
+                        <button id="cpRecommendationButton" class="cp-nav-button bg-green-600 hover:bg-green-700">
+                            Halaman Rekomendasi
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="flex-1 p-6 bg-slate-100 overflow-y-auto">
+                <div id="criteriaContent" class="cp-content-section">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-slate-700">Pengaturan
+                            Kriteria Sistem</h2>
+                        <button id="showCriteriaFormButton"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow transition duration-150">
+                            Kelola Kriteria & Bobot
+                        </button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <p class="text-slate-600 mb-4">
+                            Sebagai Admin, Admin dapat menambah, mengedit,
+                            dan menghapus kriteria evaluasi mobil. Admin
+                            juga menetapkan bobot standar untuk setiap
+                            kriteria.
+                            Kriteria yang Admin tetapkan di sini akan
+                            digunakan oleh pengguna untuk memasukkan data
+                            mobil mereka dan saat sistem melakukan
+                            perhitungan rekomendasi.
+                        </p>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-slate-700 mb-2">Daftar
+                                Kriteria & Bobot Standar Aktif:</h4>
+                            <div id="currentCriteriaSummaryTableContainer" class="table-container">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="userCarsManagementContent" class="cp-content-section">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-slate-700">Manajemen
+                            Data Mobil</h2>
+                        <div> <button id="showUserAddCarFormButtonCP"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow transition duration-150 mr-2">
+                                + Tambah Mobil Baru
+                            </button>
+                            <button id="printAdminCarListButton"
+                                class="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-3 rounded-lg shadow transition duration-150 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1"
+                                    viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5 4v3H4a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm3 0V3a1 1 0 011-1h4a1 1 0 011 1v1H8zm2 10a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Cetak Laporan Mobil
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <p class="text-slate-600 mb-4">
+                            Di sini Anda dapat mengelola daftar mobil yang
+                            akan digunakan dalam sistem pendukung keputusan.
+                            Tambah, edit, atau hapus data mobil sesuai
+                            kebutuhan.
+                        </p>
+                        <div id="userCarsTableContainer" class="table-container">
+                        </div>
+                    </div>
+                </div>
+                <div id="userHistoryContent" class="cp-content-section">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-slate-700">History
+                            Pengguna</h2>
+                        <button id="printUserHistoryButton"
+                            class="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-3 rounded-lg shadow transition duration-150 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5 4v3H4a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm3 0V3a1 1 0 011-1h4a1 1 0 011 1v1H8zm2 10a1 1 0 100-2 1 1 0 000 2z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Cetak History
+                        </button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <p class="text-slate-600 mb-4">
+                            Berikut adalah History aktivitas pengguna saat
+                            mendapatkan Hasil Rekomendasi Mobil.
+                        </p>
+                        <div id="userHistoryTableContainer" class="table-container">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="recommendationView" class="view p-4 md:p-8">
+            <h2 class="text-2xl font-bold mb-6 text-slate-700">Preferensi Rekomendasi Mobil yang sudah di Data</h2>
+
+            <div class="mb-8 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2 text-blue-600">Data
+                    Mobil Tersedia</h3>
+                <p class="text-sm text-slate-600 mb-4">
+                    Berikut adalah daftar mobil yang telah diinput oleh
+                    Administrator dan tersedia untuk analisis.
+                    Anda dapat mengelola daftar mobil ini melalui Control
+                    Panel.
+                    Selanjutnya, sesuaikan bobot preferensi kriteria di
+                    bawah ini untuk mendapatkan Hasil rekomendasi.
+                </p>
+                <div id="currentCarsInfoTableContainer" class="table-container">
+                </div>
+            </div>
+
+            <div class="mb-8 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">Atur
+                    Bobot Preferensi Setiap Kriteria</h3>
+                <p class="text-sm text-slate-600 mb-4">Masukkan bobot
+                    preferensi Anda untuk setiap kriteria di bawah ini
+                    (nilai antara 0 dan 1). Total bobot harus 1 (atau 100%).
+                    Jika dikosongkan, bobot standar dari Control Panel akan
+                    digunakan.</p>
+                <div id="userCriteriaWeights" class="space-y-3"></div>
+                <div id="recommendationActionsContainer" class="mt-6 flex flex-wrap gap-4 items-center">
+                    <button id="getRecommendationButton"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow transition duration-150 text-lg">
+                        Dapatkan Hasil Rekomendasi Mobil Anda
+                    </button>
+                </div>
+            </div>
+            <div id="recommendationResults" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-blue-600">Hasil
+                        Rekomendasi Mobil</h3>
+                    <button id="printRankingReportButton"
+                        class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 px-3 rounded-lg shadow transition duration-150 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5 4v3H4a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm3 0V3a1 1 0 011-1h4a1 1 0 011 1v1H8zm2 10a1 1 0 100-2 1 1 0 000 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cetak Hasil Rekomendasi
+                    </button>
+                </div>
+                <div id="recommendationTablePrintArea" class="hidden"></div>
+                <div id="resultsTableContainer" class="table-container">
+                    <p class="text-slate-500">Hasil akan ditampilkan di
+                        sini setelah Anda menekan tombol
+                        "Dapatkan Rekomendasi".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 text-slate-300 py-6 mt-auto shadow-inner">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h2 class="text-lg font-semibold text-white">SISPEMOB</h2>
+                <p class="text-sm text-slate-400">© <span id="currentYear"></span> Muhammad Renaldi - 2210010116. All
+                    rights reserved.</p>
+            </div>
+
+            <div class="flex space-x-4">
+                <!-- Line Icon -->
+                <a href="#" class="text-slate-400 hover:text-white transition-colors" title="Line">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6" viewBox="0 0 512 512">
+                        <path
+                            d="M407.2 73.2C367.5 33.3 309.3 10.2 250.3 10 191.3 10 133.1 33.3 93.3 73.2 54.2 112.4 31 169.4 31 229.8c0 60.1 23.2 117 62.3 156.4 39.3 39.5 93.3 62.7 151.1 62.7h1.6c27.5 0 54.5-4.8 80.5-14.2 5.4-1.8 10.4-4 15.2-6.4l84.4 22.2c8.3 2.2 17.1-1.2 21.9-8.4 4.6-7 4.5-16-0.2-23l-23.7-37.1c29.1-32.3 44.8-74.3 44.8-118.1 0-60.4-23.2-117.4-62.3-156.6zM160.2 276.4H123v-99.7h37.3v99.7zm-18.7-113c-11.8 0-21.4-9.7-21.4-21.6 0-11.9 9.6-21.6 21.4-21.6 11.9 0 21.5 9.7 21.5 21.6 0 11.9-9.6 21.6-21.5 21.6zm141.1 113h-37.3v-50.1c0-11.9-0.4-27.3-16.6-27.3-16.7 0-19.2 13-19.2 26.4v51h-37.2v-99.7h35.7v13.6h0.5c5-9.5 17.2-19.5 35.4-19.5 37.9 0 44.9 24.9 44.9 57.2v48.4zm97.4 0h-37.2v-50.1c0-11.9-0.4-27.3-16.6-27.3-16.8 0-19.2 13-19.2 26.4v51h-37.2v-99.7h35.7v13.6h0.5c5-9.5 17.2-19.5 35.4-19.5 37.9 0 44.9 24.9 44.9 57.2v48.4z" />
+                    </svg>
+                </a>
+
+                <!-- Discord Icon -->
+                <a href="#" class="text-slate-400 hover:text-white transition-colors" title="Discord">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6" viewBox="0 0 512 512">
+                        <path
+                            d="M297.216 243.2c0 15.616-11.52 28.416-27.648 28.416-16.128 0-28.416-12.8-28.416-28.416s12.8-28.416 28.416-28.416c15.616 0 27.648 12.8 27.648 28.416zM198.656 243.2c0 15.616-11.52 28.416-27.648 28.416s-28.416-12.8-28.416-28.416 12.8-28.416 28.416-28.416 27.648 12.8 27.648 28.416zM447.68 0H64.32C28.8 0 0 28.8 0 64.32v383.36C0 483.2 28.8 512 64.32 512h383.36c35.52 0 64.32-28.8 64.32-64.32V64.32C512 28.8 483.2 0 447.68 0zM371.2 368s-11.52-14.336-21.504-27.136c42.496-12.8 58.88-41.472 58.88-41.472-13.504 8.96-26.112 15.616-37.888 19.2-16.384 6.4-32.768 10.24-48.64 12.8-32.512 6.4-62.464 4.8-87.04-0.96-19.2-4.48-35.84-10.24-49.92-16.64-7.68-3.2-16-7.36-24-12.8-0.96-0.64-1.92-1.28-2.88-1.92-0.64-0.64-0.96-0.8-1.28-1.12-5.12-4.48-8-7.68-8-7.68s15.36 27.84 55.04 40.96c-9.984 13.504-22.528 29.568-22.528 29.568-74.24-2.56-102.4-51.84-102.4-51.84 0-110.72 49.92-200.32 49.92-200.32 49.92-37.888 97.28-36.864 97.28-36.864l3.52 4.16c-62.976 17.92-92.16 45.44-92.16 45.44s7.68-4.48 20.48-10.24c36.864-16 66.048-20.48 77.76-21.12 2.08-0.32 3.84-0.64 5.92-0.64 21.12-2.56 44.8-3.2 69.76-0.64 32.256 3.84 66.048 13.824 101.76 34.56 0 0-27.52-26.112-86.4-43.84l4.8-5.44s47.36-1.024 97.28 36.864c0 0 49.92 89.6 49.92 200.32 0.32 0-28.16 49.28-102.72 51.84z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menampilkan tahun saat ini
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
+
+    </footer>
+
+    <div id="criteriaFormModal" class="modal">
+        <div class="modal-content modal-content-form"><span class="close-button"
+                id="closeCriteriaFormModalButton">&times;</span>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800">Manajemen
+                Kriteria & Bobot Standar</h4>
+            <div class="mb-6 p-4 border border-sky-200 rounded-md bg-sky-50">
+                <h5 id="criteriaFormTitle" class="text-md font-semibold mb-3 text-sky-700">Tambah
+                    Kriteria Baru</h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label for="newCriterionName" class="block text-sm font-medium text-slate-700">Nama
+                            Kriteria:</label><input type="text" id="newCriterionName"
+                            class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                    <div><label for="newCriterionKey" class="block text-sm font-medium text-slate-700">Kunci
+                            (unik, tanpa spasi):</label><input type="text" id="newCriterionKey"
+                            class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                    <div><label for="newCriterionType"
+                            class="block text-sm font-medium text-slate-700">Tipe:</label><select id="newCriterionType"
+                            class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="benefit">Benefit (Semakin tinggi
+                                semakin baik)</option>
+                            <option value="cost">Cost (Semakin rendah semakin
+                                baik)</option>
+                        </select></div>
+                    <div><label for="newCriterionWeight" class="block text-sm font-medium text-slate-700">Bobot
+                            Standar (0-1):</label><input type="number" id="newCriterionWeight" step="0.01" min="0"
+                            max="1" value="0.00"
+                            class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div><button id="addNewCriterionButton"
+                    class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow transition duration-150">Tambah
+                    Kriteria</button>
+            </div>
+            <h5 class="text-md font-semibold mb-3 text-slate-800">Daftar
+                Kriteria & Bobot Standar Saat Ini</h5>
+            <div id="criteriaAdminList" class="space-y-4 mb-4"></div>
+            <div class="flex justify-end space-x-2"><button id="saveCriteriaButton"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow transition duration-150">Simpan
+                    Perubahan Bobot</button><button type="button" id="cancelCriteriaFormModalButton"
+                    class="bg-slate-300 hover:bg-slate-400 text-slate-800 font-medium py-2 px-4 rounded-lg shadow">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="carFormModal" class="modal">
+        <div class="modal-content modal-content-form"><span class="close-button"
+                id="closeCarFormModalButton">&times;</span>
+            <h4 id="formCarTitle" class="text-lg font-semibold mb-3 text-slate-800">Tambah
+                Mobil Baru</h4>
+            <form id="carForm" class="space-y-4"><input type="hidden" id="carId_form_js">
+                <div><label for="carName_form_js" class="block text-sm font-medium text-slate-700">Nama
+                        Mobil:</label><input type="text" id="carName_form_js" required
+                        class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div id="dynamicCarCriteriaFields" class="space-y-4"></div>
+                <div class="flex space-x-2 pt-2"><button type="submit" id="saveCarButtonInModal"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow">Simpan</button><button
+                        type="button" id="cancelCarFormModalButton"
+                        class="bg-slate-300 hover:bg-slate-400 text-slate-800 font-medium py-2 px-4 rounded-lg shadow">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content"><span class="close-button" id="closeModalButtonJS">&times;</span>
+            <p id="modalMessageText" class="text-lg"></p>
+        </div>
+    </div>
+</body>
+
+</html>
